@@ -41,10 +41,11 @@ public class MergeIntervals {
             Interval i1 = pq.poll();
             Interval i2 = pq.poll();
             if (i1.end >= i2.start) {
-                //in range
+                //in range, ex) [[1,3], [2,6]] => pq.offer([1,6])
                 pq.offer(new Interval(i1.start, Math.max(i1.end, i2.end)));
             }
             else {
+                //not in range, ex) [[1,6], [8,10]] => mergedList.add([1,6]) && pq.offer([8,10])
                 mergedList.add(i1);
                 pq.offer(i2);
             }
