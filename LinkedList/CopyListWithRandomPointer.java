@@ -1,3 +1,5 @@
+package LinkedList;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -6,7 +8,7 @@ import java.util.Random;
  A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
  Return a deep copy of the list.
 
- Other great solution:
+ Great solution:
  https://leetcode.com/explore/interview/card/yelp/37/linked-list-4/222/discuss/43515/My-accepted-Java-code.-O(n)-but-need-to-iterate-the-list-3-times
  */
 public class CopyListWithRandomPointer {
