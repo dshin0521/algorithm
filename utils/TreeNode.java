@@ -1,4 +1,4 @@
-package TreesAndGraphs.util;
+package utils;
 
 
 public class TreeNode {

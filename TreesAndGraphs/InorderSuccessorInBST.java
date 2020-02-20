@@ -1,7 +1,7 @@
 package TreesAndGraphs;
 
-import TreesAndGraphs.util.TreeUtil;
-import TreesAndGraphs.util.TreeNode;
+import utils.TreeUtil;
+import utils.TreeNode;
 
 /**
  Given a binary search tree and a node in it, find the in-order successor of that node in the BST.
@@ -53,6 +53,11 @@ public class InorderSuccessorInBST {
     }
     */
 
+    /*
+        Key take away here is that in-order Successor of an input node can be defined as
+            the node with the smallest key greater than the key of input node.
+        GOAL: Find smallest key greater than the key of input node
+     */
     public static TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
         TreeNode successor = null;
         while (root != null) {

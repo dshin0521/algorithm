@@ -1,7 +1,7 @@
 package TreesAndGraphs;
 
-import TreesAndGraphs.util.TreeUtil;
-import TreesAndGraphs.util.TreeNode;
+import utils.TreeUtil;
+import utils.TreeNode;
 
 /**
  Given a binary tree, count the number of uni-value subtrees.

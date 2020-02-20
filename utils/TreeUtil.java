@@ -1,4 +1,4 @@
-package TreesAndGraphs.util;
+package utils;
 
 public class TreeUtil {
 
@@ -16,7 +16,7 @@ public class TreeUtil {
         return node;
     }
 
-    static void printBinaryTree(TreeNode root) {
+    public static void printBinaryTree(TreeNode root) {
         if (root == null) return;
         System.out.println(root.val);
         printBinaryTree(root.left);

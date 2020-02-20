@@ -1,0 +1,13 @@
+### Project generated files ###
+.classpath
+.project
+out
+target
+
+### IntelliJ IDEA ###
+.idea
+*.iml
+
+### OSX file ###
+*DS_Store
+
