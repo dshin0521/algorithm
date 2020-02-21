@@ -1,7 +1,7 @@
 package TreesAndGraphs;
 
 import utils.TreeUtil;
-import utils.TreeNode;
+import pojo.TreeNode;
 
 /**
  Given a binary tree, count the number of uni-value subtrees.

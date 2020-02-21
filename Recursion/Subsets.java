@@ -42,7 +42,7 @@ Output:
         System.out.println("subsetsHelper started with startIdx = " + startIdx);
         subsets.add(new LinkedList<>(subset));
         System.out.print("subsets : ");
-        ListUtil.printListOfList(subsets);
+        ListUtil.printList(subsets);
         for(int i = startIdx; i < nums.length; i++) {
             System.out.println("loop starts with i = " + i + ", startIdx = "  + startIdx);
             subset.add(nums[i]);

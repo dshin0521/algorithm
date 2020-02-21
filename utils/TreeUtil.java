@@ -1,5 +1,7 @@
 package utils;
 
+import pojo.TreeNode;
+
 public class TreeUtil {
 
     public static TreeNode makeBinaryTree(Integer[] array) {
