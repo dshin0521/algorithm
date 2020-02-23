@@ -17,11 +17,4 @@ public class TreeUtil {
 
         return node;
     }
-
-    public static void printBinaryTree(TreeNode root) {
-        if (root == null) return;
-        System.out.println(root.val);
-        printBinaryTree(root.left);
-        printBinaryTree(root.right);
-    }
 }
