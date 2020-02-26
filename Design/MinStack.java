@@ -36,37 +36,42 @@ import java.util.Stack;
  * }
  */
 public class MinStack {
-	int min;
-	Stack<Integer> stack;
-	public MinStack() {
-		this.min  = Integer.MAX_VALUE;
-		this.stack = new Stack<>();
+
+	private class Node {
+		int val;
+		int min;
+		Node next;
+
+		private Node(int val, int min) {
+			this(val, min, null);
+		}
+
+		private Node(int val, int min, Node next) {
+			this.val = val;
+			this.min = min;
+			this.next = next;
+		}
 	}
 
+	private Node head;
+
 	public void push(int x) {
-		// only push the old minimum value when the current
-		// minimum value changes after pushing the new value x
-		if(x <= min){
-			stack.push(min);
-			min=x;
-		}
-		stack.push(x);
+		if(head == null)
+			head = new Node(x, x);
+		else
+			head = new Node(x, Math.min(x, head.min), head);
 	}
 
 	public void pop() {
-		// if pop operation could result in the changing of the current minimum value,
-		// pop twice and change the current minimum value to the last minimum value.
-		if(stack.pop() == min) {
-			min=stack.pop();
-		}
+		head = head.next;
 	}
 
 	public int top() {
-		return stack.peek();
+		return head.val;
 	}
 
 	public int getMin() {
-		return min;
+		return head.min;
 	}
 
 	public static void main(String[] args) {
@@ -76,6 +81,22 @@ public class MinStack {
 		minStack.push(13);
 		minStack.push(10);
 		minStack.push(9);
+		System.out.println(minStack.top());
+		System.out.println(minStack.getMin());
+		minStack.pop();
+		System.out.println(minStack.top());
+		System.out.println(minStack.getMin());
+		minStack.pop();
+		System.out.println(minStack.top());
+		System.out.println(minStack.getMin());
+
+
+		minStack = new MinStack();
+		minStack.push(5);
+		minStack.push(4);
+		minStack.push(3);
+		minStack.push(10);
+		minStack.push(1);
 		System.out.println(minStack.top());
 		System.out.println(minStack.getMin());
 		minStack.pop();
