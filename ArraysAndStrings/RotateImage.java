@@ -39,16 +39,19 @@ public class RotateImage {
                 || matrix[0].length < 1
                 || matrix.length != matrix[0].length) return;
 
-        int numIteration = 0;
-
-        for (int col = 0; col < Math.ceil((double) matrix[0].length / 2.0); col++) {
-            for (int row = numIteration; row < Math.ceil((double) matrix.length / 2.0); row++) {
+        for (int row = 0; row < Math.ceil((double) matrix[0].length / 2.0); row++) {
+            for (int col = row; col < matrix.length - 1 - row; col++) {
                 rotateHelper(matrix, row, col);
             }
-            numIteration++;
         }
     }
 
+    /**
+     * Useful resource:
+     * https://leetcode.com/problems/rotate-image/discuss/235478/Success%3ASimple-java-solution-beats-100-of-online-submission-explained-in-detail
+     * http://theoryofprogramming.com/2017/12/31/rotate-matrix-clockwise/
+     * https://www.youtube.com/watch?v=gCciKhaK2v8&ab_channel=FisherCoder
+     */
     private static void rotateHelper(int[][] matrix, int row, int col) {
         int tempVal = matrix[row][col];
         matrix[row][col] = matrix[matrix.length - 1 - col][row];
