@@ -25,14 +25,14 @@ import utils.ListNodeUtil;
  * 0 <= Node.val <= 100
  */
 public class SwapNodesInPairs {
-    public static ListNode swapPairs(ListNode head) {
+    public static ListNode swapPairsInRecursion(ListNode head) {
         if (head == null || head.next == null) return head;
         ListNode newHead = head.next;
-        swapPairs(null, head);
+        swapPairsInRecursion(null, head);
         return newHead;
     }
 
-    private static void swapPairs(ListNode prev, ListNode curr) {
+    private static void swapPairsInRecursion(ListNode prev, ListNode curr) {
         if (curr == null || curr.next == null) return;
         ListNode temp = curr.next;
         curr.next = temp.next;
@@ -40,22 +40,80 @@ public class SwapNodesInPairs {
         if (prev != null) {
             prev.next = temp;
         }
-        swapPairs(curr, curr.next);
+        swapPairsInRecursion(curr, curr.next);
+    }
+
+    public static ListNode swapPairsInBacktracking(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode first = head;
+        ListNode second = head.next;
+
+        first.next = swapPairsInBacktracking(second.next);
+        second.next = first;
+
+        return second;
+    }
+
+    public static ListNode swapPairsIteratively(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode first = head;
+        ListNode second = null;
+        ListNode prevHead = null;
+        head = head.next;
+
+        while(first != null) {
+            second = first.next;
+            if (second == null) break;
+            first.next = second.next;
+            second.next = first;
+            if (prevHead != null) prevHead.next = second;
+            prevHead = first;
+            first = first.next;
+        }
+
+        return head;
     }
 
     public static void main(String[] args) {
 
         ListNode testHead = new ListNode();
-        ListNode newHead = swapPairs(testHead);
+        ListNode newHead = swapPairsInRecursion(testHead);
         ListNodeUtil.printListNode(newHead);
 
         testHead = new ListNode(1);
-        newHead = swapPairs(testHead);
+        newHead = swapPairsInRecursion(testHead);
         ListNodeUtil.printListNode(newHead);
 
         testHead = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
-        newHead = swapPairs(testHead);
+        newHead = swapPairsInRecursion(testHead);
         ListNodeUtil.printListNode(newHead);
+
+        testHead = new ListNode();
+        newHead = swapPairsInBacktracking(testHead);
+        ListNodeUtil.printListNode(newHead);
+
+        testHead = new ListNode(1);
+        newHead = swapPairsInBacktracking(testHead);
+        ListNodeUtil.printListNode(newHead);
+
+        testHead = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+        newHead = swapPairsInBacktracking(testHead);
+        ListNodeUtil.printListNode(newHead);
+
+
+        testHead = new ListNode();
+        newHead = swapPairsIteratively(testHead);
+        ListNodeUtil.printListNode(newHead);
+
+        testHead = new ListNode(1);
+        newHead = swapPairsIteratively(testHead);
+        ListNodeUtil.printListNode(newHead);
+
+        testHead = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+        newHead = swapPairsIteratively(testHead);
+        ListNodeUtil.printListNode(newHead);
+
 
     }
 }
