@@ -2,6 +2,7 @@ package TreesAndGraphs;
 
 
 import pojo.TreeNode;
+import utils.TreeUtil;
 
 /**
  * Given a binary tree, determine if it is a valid binary search tree (BST).
@@ -43,5 +44,16 @@ public class ValidateBinarySearchTree {
         if (root == null) return true;
         if (root.val <= min || root.val >= max) return false;
         return isValidBST(root.left, Math.min(min, root.val), root.val) && isValidBST(root.right, root.val, Math.max(max, root.val));
+    }
+
+    public static void main(String[] args) {
+        TreeNode testTree = TreeUtil.makeBinaryTree(new Integer[]{2,1,3});
+        System.out.println(isValidBST(testTree));
+
+        testTree = TreeUtil.makeBinaryTree(new Integer[]{5,1,4,null,null,3,6});
+        System.out.println(isValidBST(testTree));
+
+        testTree = TreeUtil.makeBinaryTree(new Integer[]{3,null,30,10,null,null,15,null,45});
+        System.out.println(isValidBST(testTree));
     }
 }
