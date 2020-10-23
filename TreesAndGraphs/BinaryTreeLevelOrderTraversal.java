@@ -38,9 +38,7 @@ public class BinaryTreeLevelOrderTraversal {
         if (list.size() <= level) {
             list.add(new LinkedList<>());
         }
-        List<Integer> subList = list.get(level);
-        subList.add(root.val);
-        list.set(level, subList);
+        list.get(level).add(root.val);
 
         level++;
         levelOrder(root.left, list, level);
