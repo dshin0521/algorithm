@@ -17,29 +17,29 @@ import java.util.List;
  * ]
  */
 public class GenerateParentheses {
-  public static List<String> generateParenthesis(int n) {
-    List<String> solution = new ArrayList<>();
-    generateParenthesis(solution, "", 0, 0, n);
-    return solution;
-  }
-
-  private static void generateParenthesis(
-      List<String> parenthesisList, String parenthesis, int open, int close, int n) {
-    System.out.println("recursive call  :" + parenthesis + " open: " + open + ", close: " + close);
-    if (parenthesis.length() == n * 2) {
-      parenthesisList.add(parenthesis);
-      System.out.println("parenthesis val :" + parenthesis + " open: " + open + ", close: " + close);
-      return;
+    public static List<String> generateParenthesis(int n) {
+        List<String> solution = new ArrayList<>();
+        generateParenthesis(solution, "", 0, 0, n);
+        return solution;
     }
 
-    if (open < n)
-      generateParenthesis(parenthesisList, parenthesis + "(", open + 1, close, n);
-    if (close < open)
-      generateParenthesis(parenthesisList, parenthesis + ")", open, close + 1, n);
-  }
+    private static void generateParenthesis(
+            List<String> parenthesisList, String parenthesis, int open, int close, int n) {
+        System.out.println("recursive call  :" + parenthesis + " open: " + open + ", close: " + close);
+        if (parenthesis.length() == n * 2) {
+            parenthesisList.add(parenthesis);
+            System.out.println("parenthesis val :" + parenthesis + " open: " + open + ", close: " + close);
+            return;
+        }
 
-  public static void main(String[] args) {
-    generateParenthesis(2);
-  }
+        if (open < n)
+            generateParenthesis(parenthesisList, parenthesis + "(", open + 1, close, n);
+        if (close < open)
+            generateParenthesis(parenthesisList, parenthesis + ")", open, close + 1, n);
+    }
+
+    public static void main(String[] args) {
+        generateParenthesis(2);
+    }
 
 }

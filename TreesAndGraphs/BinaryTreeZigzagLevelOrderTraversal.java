@@ -7,8 +7,6 @@ import utils.TreeUtil;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
 
 /**
  * Given a binary tree, return the zigzag level order traversal of its nodes' values.
