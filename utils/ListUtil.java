@@ -8,7 +8,10 @@ public class ListUtil {
     private static final String CLOSING_BRACKET = "]";
 
     public static <T> void printList(List<T> listOfList) {
-        if (listOfList == null || listOfList.isEmpty()) { return; }
+        if (listOfList == null || listOfList.isEmpty()) {
+            System.out.println(OPENING_BRACKET + CLOSING_BRACKET);
+            return;
+        }
         System.out.print(OPENING_BRACKET + EMPTY_SPACE);
         for (T elem : listOfList) {
             if (elem instanceof List && !((List) elem).isEmpty() && ((List) elem).get(0) instanceof List) {

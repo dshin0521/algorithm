@@ -33,14 +33,14 @@ public class PascalTriangle {
         List<Integer> sublist = new LinkedList<>();
         sublist.add(1);
 
-        if (currRows >= 1) {
+        if (currRows > 0) {
             List<Integer> prevRow = list.get(currRows - 1);
             for (int i = 1; i < prevRow.size(); i++) {
                 sublist.add(prevRow.get(i - 1) + prevRow.get(i));
             }
         }
 
-        if (currRows >= 1) sublist.add(1);
+        if (currRows > 0) sublist.add(1);
         list.add(sublist);
 
         generate(list, numRows, ++currRows);
