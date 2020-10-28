@@ -47,6 +47,7 @@ public class PascalTriangle {
     }
 
     public static void main(String[] args) {
+        ListUtil.printList(generate(0));
         ListUtil.printList(generate(1));
         ListUtil.printList(generate(2));
         ListUtil.printList(generate(3));

@@ -2,6 +2,7 @@ package Recursion;
 
 import utils.ListUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,6 +66,27 @@ public class PascalTriangleII {
         getRow(rowIndex, ++currRow);
     }
 
+    /**
+     * Another Approach (Optimized using only O(k)!)
+     *
+     * rowIndex = 3
+     * list: 1            ->    1
+     * list: 1, 1         ->    1, 1
+     * list: 1, 2, 1      ->    1, 1, 1       ->    list.set(1, list.get(1) + list.get(1 + 1)    ->    1, 2, 1
+     * list: 1, 3, 3, 1   ->    1, 1, 2, 1    ->    list.set(1, list.get(1) + list.get(1 + 1)    ->    1, 3, 2, 1
+     *                                              list.set(2, list.get(2) + list.get(2 + 1)    ->    1, 3, 3, 1
+     */
+    public static List<Integer> getRowOptimized(int rowIndex) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i <= rowIndex; i++) {
+            result.add(0, 1);
+            for (int j = 1; j < result.size() - 1; j++) {
+                result.set(j, result.get(j) + result.get(j + 1));
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         ListUtil.printList(getRow(0));
         ListUtil.printList(getRow(1));
@@ -72,5 +94,7 @@ public class PascalTriangleII {
         ListUtil.printList(getRow(3));
         ListUtil.printList(getRow(4));
         ListUtil.printList(getRow(5));
+
+        ListUtil.printList(getRowOptimized(3));
     }
 }
