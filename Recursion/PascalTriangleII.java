@@ -67,7 +67,8 @@ public class PascalTriangleII {
     }
 
     /**
-     * Another Approach (Optimized using only O(k)!)
+     * https://www.youtube.com/watch?v=iVhmR1bzKoo&ab_channel=FisherCoder
+     * Another Approach (Optimized using only O(k) space)
      *
      * rowIndex = 3
      * list: 1            ->    1
