@@ -49,10 +49,69 @@ public class KthSymbolInGrammar {
         return Character.getNumericValue(cache[N - 1].charAt(K - 1));
     }
 
+    /**
+     * Think of the problem like this..
+     *
+     *            0
+     *         /    \
+     *        0     1
+     *      /  \   /  \
+     *     0   1  1   0
+     *
+     * When we generally implement a tree from an array, a node's left child is stored at 2 * its index + 1.
+     * And its right child is stored at 2 * its index + 2.
+     * We will use similar logic but different.
+     *
+     * 0-->01-->0110-->01101001
+     * 1-->12-->1234-->12345678 (represents the k values of each row)
+     *
+     * This problem has a different indexing (k always starts with 1).
+     * We can know a node's left child is stored at (2 * k) - 1 and the right child stored at 2 * k.
+     * i.e. a node at n = 3, k = 3 generates "5", "6" as its children --> (2 * 3) - 1 = 5, 2 * 3 = 6.
+     * This shows that if we know the parent's symbol at k, we will know the symbol of its child at 2k - 1 and 2k.
+     *
+     * The problem gives us N and K.
+     * And symbol at N with K index is 'child' of N - 1 at (K+1)/2 or K/2.
+     * This is because 2x - 1 = y --> x = (y + 1)/2 assuming x = parent's index and y = child's index.
+     *
+     * We can know whether the position of K is a left node or a right node by dividing 2.
+     * If K is even, current node is right child, and its parent is the (K/2)th node in previous row;
+     * else if K is odd, current node is left child and its parent is the ((K+1)/2)th node in previous row.
+     *
+     * Checking some examples will show "patter" or rules:
+     * For example, when N = 3 ("0110"),
+     * Assume K = 3 --> (3 + 1)/2 = 2. Go check 2nd index in N - 1 ("01"); parents and child have same symbol of "1".
+     * Assume K = 4 --> 4 / 2 = 2. Go check 2nd index in N - 1 ("01"); parents and child have different symbol (need to reverse parent's symbol).
+     *
+     * So two rules can be developed:
+     * 1) If K is even, go to K / 2 in N - 1 and reverse the parent's symbol
+     * 2) If K is odd, go to (K + 1) / 2 in N - 1 and parent have the same symbol
+     *
+     * The value of current node depends on its parent node, without knowing its parent node value, we still cannot determine current node value.
+     * That's why we need recursion, we keep going previous row to find the parent node until reach the first row.
+     * Then all the parent node value will be determined after the recursion function returns.
+     */
+    public static int kthGrammarOptimized(int N, int K) {
+        if (N == 1) return 0;
+
+        if (K % 2 == 0) {
+            if (kthGrammarOptimized(N - 1, K / 2) == 0) return 1;
+            else return 0;
+        } else {
+            if (kthGrammarOptimized(N - 1, (K + 1) / 2) == 0) return 0;
+            else return 1;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(kthGrammar(1,1));
         System.out.println(kthGrammar(2,1));
         System.out.println(kthGrammar(2,2));
         System.out.println(kthGrammar(4,5));
+
+        System.out.println(kthGrammarOptimized(1,1));
+        System.out.println(kthGrammarOptimized(2,1));
+        System.out.println(kthGrammarOptimized(2,2));
+        System.out.println(kthGrammarOptimized(4,5));
     }
 }
