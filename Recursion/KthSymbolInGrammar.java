@@ -90,6 +90,10 @@ public class KthSymbolInGrammar {
      * The value of current node depends on its parent node, without knowing its parent node value, we still cannot determine current node value.
      * That's why we need recursion, we keep going previous row to find the parent node until reach the first row.
      * Then all the parent node value will be determined after the recursion function returns.
+     *
+     * source:
+     * https://leetcode.com/problems/k-th-symbol-in-grammar/discuss/611833/Full-Explanation-for-Beginners
+     * https://leetcode.com/problems/k-th-symbol-in-grammar/discuss/113697/my-3-lines-c-recursive-solution
      */
     public static int kthGrammarOptimized(int N, int K) {
         if (N == 1) return 0;
