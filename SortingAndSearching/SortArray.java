@@ -75,7 +75,7 @@ public class SortArray {
             // i = 1, j = 0, 2, 4, 6, 8 ...
             // i = 2, j = 0, 4, 8, 12, 24 ...
             // i = 4, j = 0, 8, 16, 32, 64 ...
-            for (int j = 0; j < nums.length - 1; j += 2 * i) {
+            for (int j = 0; j < nums.length; j += 2 * i) {
                 int fromIdx = j;
                 int midIdx = j + i - 1;
                 int toIdx = Math.min(j + 2 * i - 1, nums.length - 1);
@@ -96,10 +96,12 @@ public class SortArray {
         }
 
         // Copy remaining elements
-        while (i <= midIdx) copyArr[k++] = originalArr[i++];
+        while (i < originalArr.length && i <= midIdx) copyArr[k++] = originalArr[i++];
+
+        // Do not need to copy second half
 
         // Copy back to the original array to reflect sorted order
-        for (i = fromIdx; i < toIdx; i++) {
+        for (i = fromIdx; i <= toIdx; i++) {
             originalArr[i] = copyArr[i];
         }
     }
@@ -108,6 +110,6 @@ public class SortArray {
 
     public static void main(String[] args) {
         ArrayUtil.printIntArray(mergeSortTopDown(new int[]{1,5,3,2,8,7,6,4}));
-        ArrayUtil.printIntArray(mergeSortBottomUp(new int[]{1,5,3,2,8,7,6,4}));
+        ArrayUtil.printIntArray(mergeSortBottomUp(new int[]{5,3,2,8,7,6,4,1}));
     }
 }
