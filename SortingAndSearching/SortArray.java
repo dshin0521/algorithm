@@ -183,6 +183,20 @@ public class SortArray {
         }
     }
 
+    /**
+     * Selection sort
+     */
+    private static int[] selectionSort(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] < nums[minIdx]) minIdx = j;
+            }
+            swap(nums, i, minIdx);
+        }
+        return nums;
+    }
+
     private static void swap(int[] nums, int i, int j) {
         int tmp = nums[i];
         nums[i] = nums[j];
@@ -194,5 +208,6 @@ public class SortArray {
         ArrayUtil.printIntArray(mergeSortBottomUp(new int[]{5,3,2,8,7,6,4,1}));
         ArrayUtil.printIntArray(quickSort(new int[]{5,3,2,8,7,6,4,1}));
         ArrayUtil.printIntArray(heapSort(new int[]{5,3,2,8,7,6,4,1}));
+        ArrayUtil.printIntArray(selectionSort(new int[]{5,3,2,8,7,6,4,1}));
     }
 }
