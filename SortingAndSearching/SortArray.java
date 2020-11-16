@@ -108,6 +108,7 @@ public class SortArray {
 
     /**
      * Quick sort
+     * https://www.youtube.com/watch?v=COk73cpQbFQ&t=895
      */
     public static int[] quickSort(int[] nums) {
         quickSort(nums, 0, nums.length - 1);
@@ -117,25 +118,27 @@ public class SortArray {
     public static void quickSort(int[] nums, int l, int r) {
         if (l >= r) return;
         int mid = partition(nums, l, r);
-        quickSort(nums, l, mid);
-        quickSort(nums, mid+1, r);
+        quickSort(nums, l, mid - 1);
+        quickSort(nums, mid + 1, r);
     }
 
     private static int partition(int[] nums, int l, int r) {
-        int pivot = nums[l];
-        while (l < r) {
-            while (l < r && nums[r] >= pivot) r--;
-            nums[l] = nums[r];
-            while (l < r && nums[l] <= pivot) l++;
-            nums[r] = nums[l];
+        int pivot = nums[r];
+        int partitionIdx = l;
+        // at any stage, all the elements to the left of partition index will be lesser than the pivot
+        for (int i = l; i < r; i++) {
+            if (nums[i] <= pivot) {
+                swap(nums, i, partitionIdx);
+                partitionIdx++;
+            }
         }
-        nums[l] = pivot;
-        return l;
+        swap(nums, partitionIdx, r);
+        return partitionIdx;
     }
 
     /**
      * Heap sort
-     * https://www.youtube.com/watch?v=HqPJF2L5h9U&ab_channel=AbdulBari
+     * https://www.youtube.com/watch?v=HqPJF2L5h9U
      */
     public static int[] heapSort(int[] nums) {
         buildMaxHeap(nums);
@@ -173,9 +176,7 @@ public class SortArray {
             // 3. both left and right child are available
             if (l > end) break;
             else if (r > end) k = l;
-            else {
-                k = nums[l] >= nums[r] ? l : r;
-            }
+            else k = nums[l] >= nums[r] ? l : r;
 
             if (nums[i] < nums[k]) swap(nums, i, k);
             i = k;
