@@ -107,7 +107,7 @@ public class SortArray {
     }
 
     /**
-     * quick sort
+     * Quick sort
      */
     public static int[] quickSort(int[] nums) {
         quickSort(nums, 0, nums.length - 1);
@@ -133,9 +133,65 @@ public class SortArray {
         return l;
     }
 
+    /**
+     * Heap sort
+     * https://www.youtube.com/watch?v=HqPJF2L5h9U&ab_channel=AbdulBari
+     */
+    public static int[] heapSort(int[] nums) {
+        buildMaxHeap(nums);
+        removeAndFillElems(nums);
+        return nums;
+    }
+
+    private static void buildMaxHeap(int[] nums) {
+        int i = 0;
+        while (i < nums.length) {
+            heapify(nums, nums.length - 1 - i, nums.length - 1);
+            i++;
+        }
+    }
+
+    private static void removeAndFillElems(int[] nums) {
+        int i = nums.length - 1;
+        while (i >= 1) {
+            swap(nums,  0, i);
+            heapify(nums, 0, i - 1);
+            i--;
+        }
+    }
+
+    private static void heapify(int[] nums, int i, int end) {
+        // sift down for O(n) of buildHeap
+        // https://stackoverflow.com/questions/9755721/how-can-building-a-heap-be-on-time-complexity
+        while (i <= end) {
+            int l = 2 * i + 1;
+            int r = 2 * i + 2;
+            int k;
+
+            // 1. no child is available.
+            // 2. only left child is available
+            // 3. both left and right child are available
+            if (l > end) break;
+            else if (r > end) k = l;
+            else {
+                k = nums[l] >= nums[r] ? l : r;
+            }
+
+            if (nums[i] < nums[k]) swap(nums, i, k);
+            i = k;
+        }
+    }
+
+    private static void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+
     public static void main(String[] args) {
         ArrayUtil.printIntArray(mergeSortTopDown(new int[]{1,5,3,2,8,7,6,4}));
         ArrayUtil.printIntArray(mergeSortBottomUp(new int[]{5,3,2,8,7,6,4,1}));
         ArrayUtil.printIntArray(quickSort(new int[]{5,3,2,8,7,6,4,1}));
+        ArrayUtil.printIntArray(heapSort(new int[]{5,3,2,8,7,6,4,1}));
     }
 }
