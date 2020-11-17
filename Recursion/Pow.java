@@ -80,7 +80,7 @@ public class Pow {
      * Let A be result of x^(n/2), we can talk about x^n based on the parity of n respectively.
      * If n is even, we can use the formula (x^n)^2 = x^(2*n) to get x^n = A * A.
      * If n is odd, then A * A = x^(n-1).
-     * Intuitively, We need to multiply another x to the result, so x^n = A * A * x.
+     * Intuitively, we need to multiply another x to the result, so x^n = A * A * x.
      * This approach can be easily implemented using recursion.
      * We call this method "Fast Power", because we only need at most O(log n) computations to get x^n.
      */
