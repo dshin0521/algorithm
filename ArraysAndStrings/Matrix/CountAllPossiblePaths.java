@@ -1,6 +1,8 @@
 package ArraysAndStrings.Matrix;
 
 /**
+ * https://algorithms.tutorialhorizon.com/dynamic-programming-count-all-paths-in-2d-matrix-with-obstructions-in-it/
+ *
  * Given an m x n 2D matrix, write an algorithm to count all possible paths from top left corner to bottom-right corner.
  * You are allowed to move only in two directions, move right OR move down.
  * There are few obstructions as well, means few cells are blocked and you cannot travel that cell.
