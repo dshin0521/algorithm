@@ -30,6 +30,7 @@ public class LinkedListRandomNode {
             this.head = head;
         }
 
+        // https://florian.github.io/reservoir-sampling/
         // https://leetcode.com/problems/linked-list-random-node/discuss/85659/Brief-explanation-for-Reservoir-Sampling
         public int getRandom() {
             int result = this.head.val;
