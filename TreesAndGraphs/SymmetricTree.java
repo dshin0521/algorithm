@@ -26,23 +26,23 @@ import utils.TreeUtil;
  * Bonus points if you could solve it both recursively and iteratively.
  */
 public class SymmetricTree {
-  public static boolean isSymmetric(TreeNode root) {
-    if (root == null) return true;
-    return isSymmetric(root.left, root.right);
-  }
+    public static boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
+        return isSymmetric(root.left, root.right);
+    }
 
-  private static boolean isSymmetric(TreeNode leftNode, TreeNode rightNode) {
-    if (leftNode == null && rightNode == null) return true;
-    if (leftNode == null || rightNode == null) return false;
-    if (leftNode.val != rightNode.val) return false;
-    return isSymmetric(leftNode.left, rightNode.right) && isSymmetric(leftNode.right, rightNode.left);
-  }
+    private static boolean isSymmetric(TreeNode leftNode, TreeNode rightNode) {
+        if (leftNode == null && rightNode == null) return true;
+        if (leftNode == null || rightNode == null) return false;
+        if (leftNode.val != rightNode.val) return false;
+        return isSymmetric(leftNode.left, rightNode.right) && isSymmetric(leftNode.right, rightNode.left);
+    }
 
-  public static void main(String[] args) {
-    TreeNode head = TreeUtil.makeBinaryTree(new Integer[]{1,2,2,3,4,4,3});
-    System.out.println(isSymmetric(head));
+    public static void main(String[] args) {
+        TreeNode head = TreeUtil.makeBinaryTree(new Integer[]{1,2,2,3,4,4,3});
+        System.out.println(isSymmetric(head));
 
-    head = TreeUtil.makeBinaryTree(new Integer[]{1,2,2,null,3,null,3});
-    System.out.println(isSymmetric(head));
-  }
+        head = TreeUtil.makeBinaryTree(new Integer[]{1,2,2,null,3,null,3});
+        System.out.println(isSymmetric(head));
+    }
 }

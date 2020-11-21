@@ -31,20 +31,20 @@ package ArraysAndStrings;
  * For C programmers, try to solve it in-place in O(1) extra space.
  */
 public class ReverseWordsInAString {
-  public static String reverseWords(String s) {
-    String[] wordsArr = s.trim().split("\\s+");
+    public static String reverseWords(String s) {
+        String[] wordsArr = s.trim().split("\\s+");
 
-    StringBuilder sb = new StringBuilder();
-    for (int i = wordsArr.length - 1; i >= 0; i--) {
-      sb.append(wordsArr[i]);
-      sb.append(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int i = wordsArr.length - 1; i >= 0; i--) {
+            sb.append(wordsArr[i]);
+            sb.append(" ");
+        }
+        sb.setLength(sb.length() - 1);
+        return sb.toString();
     }
-    sb.setLength(sb.length() - 1);
-    return sb.toString();
-  }
 
-  public static void main(String[] args) {
-    String testStr = "the sky is blue";
-    System.out.println(reverseWords(testStr));
-  }
+    public static void main(String[] args) {
+        String testStr = "the sky is blue";
+        System.out.println(reverseWords(testStr));
+    }
 }

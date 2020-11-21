@@ -28,66 +28,66 @@ import utils.ListNodeUtil;
  */
 public class AddTwoNumbers {
 
-	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-		ListNode firstListPtr = l1;
-		ListNode secondListPtr = l2;
-		int carryOver = 0;
+        ListNode firstListPtr = l1;
+        ListNode secondListPtr = l2;
+        int carryOver = 0;
 
-		ListNode resultList = null;
-		ListNode resultListPtr = null;
+        ListNode resultList = null;
+        ListNode resultListPtr = null;
 
-		while (firstListPtr != null || secondListPtr != null) {
+        while (firstListPtr != null || secondListPtr != null) {
 
-			int firstListVal = 0;
-			if (firstListPtr != null) {
-				firstListVal = firstListPtr.val;
-				firstListPtr = firstListPtr.next;
-			}
+            int firstListVal = 0;
+            if (firstListPtr != null) {
+                firstListVal = firstListPtr.val;
+                firstListPtr = firstListPtr.next;
+            }
 
-			int secondListVal = 0;
-			if (secondListPtr != null) {
-				secondListVal = secondListPtr.val;
-				secondListPtr = secondListPtr.next;
-			}
+            int secondListVal = 0;
+            if (secondListPtr != null) {
+                secondListVal = secondListPtr.val;
+                secondListPtr = secondListPtr.next;
+            }
 
-			int sum = firstListVal + secondListVal + carryOver;
-			carryOver = sum / 10;
-			sum = sum % 10;
+            int sum = firstListVal + secondListVal + carryOver;
+            carryOver = sum / 10;
+            sum = sum % 10;
 
-			/**
-			 * We can get rid of below if/else block.
-			 * A method can start by,
-			 * 		ListNode resultList = new ListNode(-1);
-			 * 		ListNode resultListPtr = resultList;
-			 * and before returning the list it can,
-			 * 		return resultList.next;
-			 * No unnecessary if check and simpler.
-			 */
-			if (resultList == null) {
-				resultList = new ListNode(sum);
-				resultListPtr = resultList;
-			} else {
-				resultListPtr.next = new ListNode(sum);
-				resultListPtr = resultListPtr.next;
-			}
-		}
-		if (carryOver != 0) {
-			resultListPtr.next = new ListNode(1);
-		}
-		return resultList;
-	}
+            /**
+             * We can get rid of below if/else block.
+             * A method can start by,
+             * 		ListNode resultList = new ListNode(-1);
+             * 		ListNode resultListPtr = resultList;
+             * and before returning the list it can,
+             * 		return resultList.next;
+             * No unnecessary if check and simpler.
+             */
+            if (resultList == null) {
+                resultList = new ListNode(sum);
+                resultListPtr = resultList;
+            } else {
+                resultListPtr.next = new ListNode(sum);
+                resultListPtr = resultListPtr.next;
+            }
+        }
+        if (carryOver != 0) {
+            resultListPtr.next = new ListNode(1);
+        }
+        return resultList;
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
-		ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
-		ListNode result = addTwoNumbers(l1, l2);
-		ListNodeUtil.printListNode(result);
+        ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
+        ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
+        ListNode result = addTwoNumbers(l1, l2);
+        ListNodeUtil.printListNode(result);
 
-		l1 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
-		l2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
-		result = addTwoNumbers(l1, l2);
-		ListNodeUtil.printListNode(result);
-	}
+        l1 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
+        l2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
+        result = addTwoNumbers(l1, l2);
+        ListNodeUtil.printListNode(result);
+    }
 }

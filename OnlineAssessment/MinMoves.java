@@ -22,36 +22,36 @@ package OnlineAssessment;
  * 2. String S consists only of the characters "a" and/or "b".
  */
 public class MinMoves {
-  public static int solution(String s) {
+    public static int solution(String s) {
 
-    int countA = 0;
-    int countB = 0;
-    int numMove = 0;
-    for (int i = 0; i < s.length(); i++) {
-      char currentChar = s.charAt(i);
-      if (currentChar == 'a') {
-        countB = 0;
-        countA += 1;
-        if (countA == 3) {
-          numMove += 1;
-          countA = 0;
+        int countA = 0;
+        int countB = 0;
+        int numMove = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char currentChar = s.charAt(i);
+            if (currentChar == 'a') {
+                countB = 0;
+                countA += 1;
+                if (countA == 3) {
+                    numMove += 1;
+                    countA = 0;
+                }
+            } else {
+                countA = 0;
+                countB += 1;
+                if (countB == 3) {
+                    numMove += 1;
+                    countB = 0;
+                }
+            }
         }
-      } else {
-        countA = 0;
-        countB += 1;
-        if (countB == 3) {
-          numMove += 1;
-          countB = 0;
-        }
-      }
+        return numMove;
     }
-    return numMove;
-  }
 
-  public static void main(String[] args) {
-    System.out.println(solution("baaaaa"));
-    System.out.println(solution("baaabbaabbba"));
-    System.out.println(solution("baabab"));
-    System.out.println(solution("baaaaaaaaaab"));
-  }
+    public static void main(String[] args) {
+        System.out.println(solution("baaaaa"));
+        System.out.println(solution("baaabbaabbba"));
+        System.out.println(solution("baabab"));
+        System.out.println(solution("baaaaaaaaaab"));
+    }
 }

@@ -18,25 +18,25 @@ import utils.TreeUtil;
  * Note: The length of path between two nodes is represented by the number of edges between them.
  */
 public class DiameterOfBinaryTree {
-  static int maxDepth = 0;
+    static int maxDepth = 0;
 
-  public static int diameterOfBinaryTree(TreeNode root) {
-    getDeepestDepth(root);
-    return maxDepth;
-  }
+    public static int diameterOfBinaryTree(TreeNode root) {
+        getDeepestDepth(root);
+        return maxDepth;
+    }
 
-  private static int getDeepestDepth(TreeNode root) {
-    if (root == null) return 0;
+    private static int getDeepestDepth(TreeNode root) {
+        if (root == null) return 0;
 
-    int leftDepth = getDeepestDepth(root.left);
-    int rightDepth = getDeepestDepth(root.right);
+        int leftDepth = getDeepestDepth(root.left);
+        int rightDepth = getDeepestDepth(root.right);
 
-    maxDepth = Math.max(maxDepth, leftDepth + rightDepth);
-    return Math.max(leftDepth, rightDepth) + 1;
-  }
+        maxDepth = Math.max(maxDepth, leftDepth + rightDepth);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
 
-  public static void main(String[] args) {
-    TreeNode testTree = TreeUtil.makeBinaryTree(new Integer[]{1,2,3,4,5,null,null});
-    System.out.println(diameterOfBinaryTree(testTree));
-  }
+    public static void main(String[] args) {
+        TreeNode testTree = TreeUtil.makeBinaryTree(new Integer[]{1,2,3,4,5,null,null});
+        System.out.println(diameterOfBinaryTree(testTree));
+    }
 }
