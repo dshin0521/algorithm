@@ -1,4 +1,4 @@
-package Recursion;
+package Recursion.Backtracking;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +23,16 @@ public class GenerateParentheses {
         return solution;
     }
 
-    private static void generateParenthesis(
-            List<String> parenthesisList, String parenthesis, int open, int close, int n) {
-        System.out.println("recursive call  :" + parenthesis + " open: " + open + ", close: " + close);
+    private static void generateParenthesis(List<String> list, String parenthesis, int open, int close, int n) {
         if (parenthesis.length() == n * 2) {
-            parenthesisList.add(parenthesis);
-            System.out.println("parenthesis val :" + parenthesis + " open: " + open + ", close: " + close);
+            list.add(parenthesis);
             return;
         }
 
         if (open < n)
-            generateParenthesis(parenthesisList, parenthesis + "(", open + 1, close, n);
+            generateParenthesis(list, parenthesis + "(", open + 1, close, n);
         if (close < open)
-            generateParenthesis(parenthesisList, parenthesis + ")", open, close + 1, n);
+            generateParenthesis(list, parenthesis + ")", open, close + 1, n);
     }
 
     public static void main(String[] args) {
