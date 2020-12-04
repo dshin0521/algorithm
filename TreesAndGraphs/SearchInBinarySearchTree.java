@@ -1,4 +1,4 @@
-package Recursion;
+package TreesAndGraphs;
 
 import pojo.TreeNode;
 import utils.TreeUtil;
