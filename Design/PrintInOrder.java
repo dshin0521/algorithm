@@ -61,6 +61,36 @@ public class PrintInOrder {
 //        printThird.run();
 //    }
 
+//    private boolean oneDone;
+//    private boolean twoDone;
+//
+//    public PrintInOrder() {
+//        oneDone = false;
+//        twoDone = false;
+//    }
+//
+//    public synchronized void first(Runnable printFirst) throws InterruptedException {
+//        printFirst.run();
+//        oneDone = true;
+//        notifyAll();
+//    }
+//
+//    public synchronized void second(Runnable printSecond) throws InterruptedException {
+//        while (!oneDone) {
+//            wait();
+//        }
+//        printSecond.run();
+//        twoDone = true;
+//        notifyAll();
+//    }
+//
+//    public synchronized void third(Runnable printThird) throws InterruptedException {
+//        while (!twoDone) {
+//            wait();
+//        }
+//        printThird.run();
+//    }
+
     private boolean oneDone;
     private boolean twoDone;
 
@@ -69,26 +99,32 @@ public class PrintInOrder {
         twoDone = false;
     }
 
-    public synchronized void first(Runnable printFirst) throws InterruptedException {
-        printFirst.run();
-        oneDone = true;
-        notifyAll();
+    public void first(Runnable printFirst) throws InterruptedException {
+        synchronized (this) {
+            printFirst.run();
+            oneDone = true;
+            this.notifyAll();
+        }
     }
 
-    public synchronized void second(Runnable printSecond) throws InterruptedException {
-        while (!oneDone) {
-            wait();
+    public void second(Runnable printSecond) throws InterruptedException {
+        synchronized (this) {
+            while (!oneDone) {
+                this.wait();
+            }
+            printSecond.run();
+            twoDone = true;
+            this.notifyAll();
         }
-        printSecond.run();
-        twoDone = true;
-        notifyAll();
     }
 
-    public synchronized void third(Runnable printThird) throws InterruptedException {
-        while (!twoDone) {
-            wait();
+    public void third(Runnable printThird) throws InterruptedException {
+        synchronized (this) {
+            while (!twoDone) {
+                this.wait();
+            }
+            printThird.run();
         }
-        printThird.run();
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -104,11 +140,11 @@ public class PrintInOrder {
             System.out.println("third");
         };
 
-        PrintInOrder foo = new PrintInOrder();
+        PrintInOrder printInOrder = new PrintInOrder();
 
         Thread t1 = new Thread(() -> {
             try {
-                foo.second(second);
+                printInOrder.second(second);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -116,7 +152,7 @@ public class PrintInOrder {
 
         Thread t2 = new Thread(() -> {
             try {
-                foo.first(first);
+                printInOrder.first(first);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -124,7 +160,7 @@ public class PrintInOrder {
 
         Thread t3 = new Thread(() -> {
             try {
-                foo.third(third);
+                printInOrder.third(third);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
