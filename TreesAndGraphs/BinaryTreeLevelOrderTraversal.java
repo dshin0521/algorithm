@@ -7,6 +7,7 @@ import utils.TreeUtil;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
@@ -45,8 +46,31 @@ public class BinaryTreeLevelOrderTraversal {
         levelOrder(root.right, list, level);
     }
 
+    public static List<List<Integer>> levelOrderIterative(TreeNode root) {
+        if (root == null) return new LinkedList<>();
+
+        List<List<Integer>> levels = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int queueSize = queue.size();
+            List<Integer> level = new ArrayList<>(queueSize);
+            for (int i = 0; i < queueSize; i++){
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+            levels.add(level);
+        }
+
+        return levels;
+    }
+
     public static void main(String[] args) {
         TreeNode testTree = TreeUtil.makeBinaryTree(new Integer[]{3,9,20,null,null,15,7});
         ListUtil.printList(levelOrder(testTree));
+        ListUtil.printList(levelOrderIterative(testTree));
     }
 }
