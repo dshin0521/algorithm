@@ -34,32 +34,44 @@ import java.util.concurrent.Semaphore;
  */
 public class PrintInOrder {
 
-//    private Semaphore s2;
-//    private Semaphore s3;
-//
-//    public PrintInOrder() {
-//        s2 = new Semaphore(0);
-//        s3 = new Semaphore(0);
-//    }
-//
-//    public void first(Runnable printFirst) throws InterruptedException {
-//        // printFirst.run() outputs "first". Do not change or remove this line.
-//        printFirst.run();
-//        s2.release();
-//    }
-//
-//    public void second(Runnable printSecond) throws InterruptedException {
-//        s2.acquire();
-//        // printSecond.run() outputs "second". Do not change or remove this line.
-//        printSecond.run();
-//        s3.release();
-//    }
-//
-//    public void third(Runnable printThird) throws InterruptedException {
-//        s3.acquire();
-//        // printThird.run() outputs "third". Do not change or remove this line.
-//        printThird.run();
-//    }
+    /**
+     * Resources:
+     * https://leetcode.com/problems/print-in-order/discuss/893827/Java-SynchronizedLockSemaphoreCondition-Variable
+     *
+     * Difference between synchronized block and method
+     *      https://www.java67.com/2013/01/difference-between-synchronized-block-vs-method-java-example.html
+     * Mutex vs Semaphore
+     *      https://stackoverflow.com/questions/34519/what-is-a-semaphore/40238#40238
+     * What does 'synchronized' mean?
+     *      https://stackoverflow.com/questions/1085709/what-does-synchronized-mean
+     *
+     */
+    private Semaphore s2;
+    private Semaphore s3;
+
+    public PrintInOrder() {
+        s2 = new Semaphore(0);
+        s3 = new Semaphore(0);
+    }
+
+    public void first(Runnable printFirst) throws InterruptedException {
+        // printFirst.run() outputs "first". Do not change or remove this line.
+        printFirst.run();
+        s2.release();
+    }
+
+    public void second(Runnable printSecond) throws InterruptedException {
+        s2.acquire();
+        // printSecond.run() outputs "second". Do not change or remove this line.
+        printSecond.run();
+        s3.release();
+    }
+
+    public void third(Runnable printThird) throws InterruptedException {
+        s3.acquire();
+        // printThird.run() outputs "third". Do not change or remove this line.
+        printThird.run();
+    }
 
 //    private boolean oneDone;
 //    private boolean twoDone;
@@ -90,42 +102,44 @@ public class PrintInOrder {
 //        }
 //        printThird.run();
 //    }
-
-    private boolean oneDone;
-    private boolean twoDone;
-
-    public PrintInOrder() {
-        oneDone = false;
-        twoDone = false;
-    }
-
-    public void first(Runnable printFirst) throws InterruptedException {
-        synchronized (this) {
-            printFirst.run();
-            oneDone = true;
-            this.notifyAll();
-        }
-    }
-
-    public void second(Runnable printSecond) throws InterruptedException {
-        synchronized (this) {
-            while (!oneDone) {
-                this.wait();
-            }
-            printSecond.run();
-            twoDone = true;
-            this.notifyAll();
-        }
-    }
-
-    public void third(Runnable printThird) throws InterruptedException {
-        synchronized (this) {
-            while (!twoDone) {
-                this.wait();
-            }
-            printThird.run();
-        }
-    }
+//
+//    private Object lock;
+//    private boolean oneDone;
+//    private boolean twoDone;
+//
+//    public PrintInOrder() {
+//        lock = new Object();
+//        oneDone = false;
+//        twoDone = false;
+//    }
+//
+//    public void first(Runnable printFirst) throws InterruptedException {
+//        synchronized (lock) {
+//            printFirst.run();
+//            oneDone = true;
+//            lock.notifyAll();
+//        }
+//    }
+//
+//    public void second(Runnable printSecond) throws InterruptedException {
+//        synchronized (lock) {
+//            while (!oneDone) {
+//                lock.wait();
+//            }
+//            printSecond.run();
+//            twoDone = true;
+//            lock.notifyAll();
+//        }
+//    }
+//
+//    public void third(Runnable printThird) throws InterruptedException {
+//        synchronized (lock) {
+//            while (!twoDone) {
+//                lock.wait();
+//            }
+//            printThird.run();
+//        }
+//    }
 
     public static void main(String[] args) throws InterruptedException {
         Runnable first = () ->  {
